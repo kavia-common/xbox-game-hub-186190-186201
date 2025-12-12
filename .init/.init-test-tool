@@ -1,0 +1,4 @@
+{
+    "command": "pytest",
+    "working_directory": "/home/kavia/workspace/code-generation/xbox-game-hub-186190-186201/xbox_backend"
+}
