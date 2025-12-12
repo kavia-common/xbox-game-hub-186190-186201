@@ -136,7 +136,7 @@ def get_game_details(game_id: int, db: Session = Depends(get_db)) -> GameDetail:
         thumbnail=game.thumbnail,
         description=game.description,
         screenshots=game.screenshots or [],
-        metadata=game.metadata or {},
+        metadata=game.extra_metadata or {},
     )
 
 

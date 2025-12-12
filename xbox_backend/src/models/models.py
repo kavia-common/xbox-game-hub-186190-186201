@@ -19,9 +19,11 @@ class Game(Base):
     genre = Column(String(100), nullable=True, index=True)
     thumbnail = Column(Text, nullable=True)
     description = Column(Text, nullable=True)
-    # Postgres friendly types: use ARRAY(Text) for screenshots, JSONB for metadata
+    # Postgres friendly types: use ARRAY(Text) for screenshots, JSONB for extra metadata
     screenshots = Column(ARRAY(Text), nullable=True, default=[])
-    metadata = Column(JSONB, nullable=True, default={})
+    # "metadata" is a reserved attribute name in SQLAlchemy's Declarative API.
+    # Use a different attribute name while still mapping the column name to "metadata" in the DB.
+    extra_metadata = Column("metadata", JSONB, nullable=True, default={})
 
 
 class Account(Base):

@@ -94,7 +94,7 @@ def init_db(seed: bool = True) -> None:
                         "https://images.unsplash.com/photo-1590608897129-79da98d1593d?w=1200&q=80",
                         "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=1200&q=80",
                     ],
-                    metadata={"platform": "Xbox Series X|S", "rating": "T"},
+                    extra_metadata={"platform": "Xbox Series X|S", "rating": "T"},
                 ),
                 Game(
                     title="Forza Horizon 5",
@@ -105,7 +105,7 @@ def init_db(seed: bool = True) -> None:
                         "https://images.unsplash.com/photo-1517673400267-0251440c45dc?w=1200&q=80",
                         "https://images.unsplash.com/photo-1518306727298-4c7e88b2f65a?w=1200&q=80",
                     ],
-                    metadata={"platform": "Xbox Series X|S", "rating": "E"},
+                    extra_metadata={"platform": "Xbox Series X|S", "rating": "E"},
                 ),
                 Game(
                     title="Sea of Thieves",
@@ -115,7 +115,7 @@ def init_db(seed: bool = True) -> None:
                     screenshots=[
                         "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200&q=80"
                     ],
-                    metadata={"platform": "Xbox One", "rating": "T"},
+                    extra_metadata={"platform": "Xbox One", "rating": "T"},
                 ),
             ]
             session.add_all(demo_games)
