@@ -19,6 +19,7 @@ from src.schemas.schemas import (
     LoginRequest,
     RegisterRequest,
     AccountResponse,
+    ProfileResponse,
 )
 
 APP_TITLE = "Xbox Game Hub API"
@@ -31,6 +32,7 @@ openapi_tags = [
     {"name": "Health", "description": "Service health and status endpoints."},
     {"name": "Games", "description": "Browse and view game information."},
     {"name": "Accounts", "description": "Register and login to accounts (demo)."},
+    {"name": "Profile", "description": "User profile endpoints (demo)."},
 ]
 
 app = FastAPI(
@@ -40,7 +42,7 @@ app = FastAPI(
     openapi_tags=openapi_tags,
 )
 
-# CORS
+# CORS (keep as-is behavior)
 default_origins = [
     "http://localhost:3000",
     os.getenv("FRONTEND_URL", "").strip('"').strip("'"),
@@ -213,3 +215,30 @@ def login(payload: LoginRequest, db: Session = Depends(get_db)) -> AuthResponse:
         id=account.id, email=account.email, username=account.username, created_at=account.created_at
     )
     return AuthResponse(success=True, message="Logged in", account=acc, token=_fake_token(account.id))
+
+
+# PUBLIC_INTERFACE
+@app.get(
+    "/api/account/profile",
+    response_model=ProfileResponse,
+    tags=["Profile"],
+    summary="Get current user profile (demo)",
+    description="Returns a static demo profile for the current user. No authentication is required in this demo.",
+)
+def get_profile() -> ProfileResponse:
+    """Return a static demo profile object.
+
+    For the purpose of this demo, this endpoint does not authenticate the user
+    and always returns the same mock profile.
+    """
+    return ProfileResponse(
+        id=1,
+        gamertag="DemoSpartan117",
+        avatar="https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?w=256&q=80",
+        bio="Xbox enthusiast. Loves shooters and racing games.",
+        preferences={
+            "theme": "light",
+            "language": "en-US",
+            "mature_content": False,
+        },
+    )

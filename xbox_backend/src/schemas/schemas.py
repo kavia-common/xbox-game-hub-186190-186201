@@ -67,3 +67,12 @@ class AuthResponse(BaseModel):
     message: str = Field(..., description="Result message")
     account: Optional[AccountResponse] = Field(None, description="Account details when applicable")
     token: Optional[str] = Field(None, description="Fake token for demo")
+
+
+class ProfileResponse(BaseModel):
+    """Static demo profile response for the current (mock) user."""
+    id: int = Field(..., description="User ID")
+    gamertag: str = Field(..., description="Xbox gamertag")
+    avatar: Optional[str] = Field(None, description="Avatar image URL")
+    bio: Optional[str] = Field(None, description="Short bio")
+    preferences: Optional[Dict[str, Any]] = Field(default=None, description="User preference key-values")
